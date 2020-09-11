@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BackGroundController : MonoBehaviour
 {
-    new Renderer renderer;
+    private new Renderer renderer;
     public float panSpeed;
     // Start is called before the first frame update
     void Start()
