@@ -34,12 +34,12 @@ public class CubeControllerTest : MonoBehaviour
         0.0f
         );
 
-        if (!shoot && joyButton.Pressed)
-        {
-            shoot = true;
-            Debug.Log("<color=green>ShipController: </color>We are shooting!!");
+        //if (!shoot && joyButton.Pressed)
+        //{
+        //    shoot = true;
+        //    Debug.Log("<color=green>ShipController: </color>We are shooting!!");
 
-        }
+        //}
 
         if (shoot && !joyButton.Pressed)
         {
