@@ -19,7 +19,6 @@ public class LaserBeamControl : MonoBehaviour
 
     public void SwitchLaserBeam ()
     {
-        Debug.Log("Sip, estas aquí!!");
         foreach (LineRenderer element in lineRenderers)
         {
             if (!element.enabled)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Xml.Schema;
 using UnityEngine;
 
-public class CubeControllerTest : MonoBehaviour
+public class PlayerShipController : MonoBehaviour
 {    
     protected Rigidbody rb;
     public float speed;
