@@ -6,6 +6,7 @@ using Random = UnityEngine.Random;
 public class SpawnArea : MonoBehaviour
 {
     protected GameObject[] enemies;
+    protected GameObject[] asteroids;
     public GameObject enemy;
     public float xPos;
     public float yPos;
@@ -14,26 +15,23 @@ public class SpawnArea : MonoBehaviour
     void Start()
     {
         enemies = Resources.LoadAll<GameObject>("Enemies");
-        //StartCoroutine(EnemySpawn());
-
-        int randomEnemyId = Random.Range(0, enemies.Length);
-       
-      
-        StartCoroutine(FormacionEnDelta(2, randomEnemyId, 5));
+        asteroids = Resources.LoadAll<GameObject>("Asteroids/Prefabs");
+        StartCoroutine(SpawnAsteroids());
+        //StartCoroutine(FormacionEnDelta(2, Random.Range(0, enemies.Length), 5));
         
 
     }
 
-    IEnumerator EnemySpawn()
+    IEnumerator SpawnAsteroids()
     {
         while (Application.isPlaying)
         {
 
             CreateRandomSpawnPoint();
 
-            int randomEnemyId = Random.Range(0, enemies.Length);
-            GameObject enemyInstance = (GameObject)Instantiate(enemies[randomEnemyId], new Vector3(xPos, yPos, 60), Quaternion.identity);
-            Debug.Log("<color=green>SpawnArea:</color> enemyInstance.GetComponent<Collider>().bounds.size = " + enemyInstance.GetComponent<Collider>().bounds.size);
+            int randomAsteroidId = Random.Range(0, asteroids.Length);
+            GameObject asteroidInstance = (GameObject)Instantiate(asteroids[randomAsteroidId], new Vector3(xPos, yPos, 60), Quaternion.identity);
+            Debug.Log("<color=green>SpawnArea:</color> enemyInstance.GetComponent<Collider>().bounds.size = " + asteroidInstance.GetComponent<Collider>().bounds.size);
 
             yield return new WaitForSeconds(Random.Range(0.5f, 2f));
         }
