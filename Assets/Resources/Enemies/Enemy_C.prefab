@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3775503686182176439}
   - component: {fileID: 3775503686182176443}
   - component: {fileID: 3775503686182176444}
+  - component: {fileID: 3473424205841683477}
   m_Layer: 0
   m_Name: Enemy_C
   m_TagString: Untagged
@@ -102,12 +103,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3775503686182176438}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c60e4c23c4af5184fbd28d19304465ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
 --- !u!54 &3775503686182176444
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -124,3 +124,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3473424205841683477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3775503686182176438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8c97d61fdb519d4eaac7839a8b06b36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 20
