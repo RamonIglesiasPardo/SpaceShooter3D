@@ -1,14 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
     public float waveRate;
     public float waveStart;
-    
-
-    private Vector3 spawnPosition;
     private float wave;
     private Formations formations;
 

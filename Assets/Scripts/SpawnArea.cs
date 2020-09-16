@@ -17,7 +17,7 @@ public class SpawnArea : MonoBehaviour
         enemies = Resources.LoadAll<GameObject>("Enemies");
         asteroids = Resources.LoadAll<GameObject>("Asteroids/Prefabs");
         StartCoroutine(SpawnAsteroids());
-        //StartCoroutine(FormacionEnDelta(2, Random.Range(0, enemies.Length), 5));
+        StartCoroutine(FormacionEnDelta(2, Random.Range(0, enemies.Length), 5));
         
 
     }

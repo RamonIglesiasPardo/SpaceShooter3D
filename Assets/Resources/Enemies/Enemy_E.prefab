@@ -90,8 +90,9 @@ GameObject:
   - component: {fileID: 7579987492687068955}
   - component: {fileID: -9152405217321331019}
   - component: {fileID: 356758996659183618}
+  - component: {fileID: 6927854948606253276}
   m_Layer: 0
-  m_Name: ship001
+  m_Name: Enemy_E
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -141,3 +142,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
+--- !u!65 &6927854948606253276
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6875553720089890056}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.0070496, y: 1.6444154, z: 4.7557383}
+  m_Center: {x: 0, y: 0.1308968, z: 0.22654915}
