@@ -54,18 +54,27 @@ public class FormationConstructor : MonoBehaviour
                 }
                 break;
             case "LeftDownTri":
-                int colZeroCount = 0;
-                for (int i = 0; i < spawneablePositions.Count; i++)
+                foreach (Vector3 position in spawneablePositions)
                 {
-                    if (i == 0 || spawneablePositions[i].x != spawneablePositions[i-1].x)
+                    float y = (-3.0f / 7.0f) * position.x + (1.0f / 2.0f);
+                    if (position.y <= y)
                     {
-                        positionsToSpawn.Add(spawneablePositions[i]);                        
+                        positionsToSpawn.Add(position);
                     }
-                    if (spawneablePositions[i].x == spawneablePositions[0].x)
-                    {
-                        colZeroCount++; 
-                    }
-                }                
+                }
+                //TODO Redefine LeftDownTri
+                //int colZeroCount = 0;
+                //for (int i = 0; i < spawneablePositions.Count; i++)
+                //{
+                //    if (i == 0 || spawneablePositions[i].x != spawneablePositions[i-1].x)
+                //    {
+                //        positionsToSpawn.Add(spawneablePositions[i]);                        
+                //    }
+                //    if (spawneablePositions[i].x == spawneablePositions[0].x)
+                //    {
+                //        colZeroCount++; 
+                //    }
+                //}                
                 break;
             case "RightDownTri":
                 foreach (Vector3 position in spawneablePositions)
