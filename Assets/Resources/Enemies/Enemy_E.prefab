@@ -91,6 +91,8 @@ GameObject:
   - component: {fileID: -9152405217321331019}
   - component: {fileID: 356758996659183618}
   - component: {fileID: 6927854948606253276}
+  - component: {fileID: 7170788338055598655}
+  - component: {fileID: -4423644848821394471}
   m_Layer: 0
   m_Name: Enemy_E
   m_TagString: Enemy
@@ -155,3 +157,50 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.0070496, y: 1.6444154, z: 4.7557383}
   m_Center: {x: 0, y: 0.1308968, z: 0.22654915}
+--- !u!23 &7170788338055598655
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6875553720089890056}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &-4423644848821394471
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6875553720089890056}
+  m_Mesh: {fileID: -2432090755550338912, guid: 6288eada988f6fd4d924545b62f84e5a, type: 3}

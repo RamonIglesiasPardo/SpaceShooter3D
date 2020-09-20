@@ -1677,10 +1677,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ac5df2d73a08e045b33073bf78efcb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 1
+  level: 5
   waveStart: 0
   spawnRate: 1
-  spawnPoint: {fileID: 1329899633}
 --- !u!4 &1329899633
 Transform:
   m_ObjectHideFlags: 0
@@ -1719,7 +1718,6 @@ MonoBehaviour:
   - LeftUpTri
   - RightUpTri
   positionsToSpawn: []
-  spawneablePositions: []
 --- !u!1 &1565318503
 GameObject:
   m_ObjectHideFlags: 0
