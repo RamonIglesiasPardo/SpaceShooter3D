@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5794481733379598908}
   - component: {fileID: 5794481733379598903}
   - component: {fileID: 421326671103017918}
+  - component: {fileID: -5535145095671067109}
   m_Layer: 0
   m_Name: Asteroid_A
   m_TagString: Asteroid
@@ -61,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 59e4faf24927edf4a82f463ad16f1c37, type: 2}
+  - {fileID: 2100000, guid: 56f8777b731e64447b2dc853f39ce842, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -124,3 +125,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
+--- !u!114 &-5535145095671067109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5794481733379598909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f532af83590ef594f949554238e0a256, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tumble: 15
