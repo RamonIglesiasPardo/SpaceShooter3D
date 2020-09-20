@@ -16,4 +16,12 @@ public class BasicBehavior : MonoBehaviour
     {
         rb.velocity = Vector3.back * speed;
     }
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("PlayerShip"))
+        {
+            Debug.Log("<color=green>BaseEnemyBehavior: </color>Collision detected with player!!");
+            Destroy(gameObject);
+        }
+    }
 }

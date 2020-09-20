@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class FormationConstructor : MonoBehaviour
 {
-    private Transform spawnPoint;
     private PlayerShipController playerShipController;
 
     public string[] formations;
@@ -12,23 +11,21 @@ public class FormationConstructor : MonoBehaviour
     public List<Vector3> spawneablePositions = new List<Vector3>();
 
     void Start()
-    {
-        spawnPoint = GameObject.FindGameObjectWithTag("Spawner").GetComponent<Transform>();
+    {       
         playerShipController = GameObject.FindGameObjectWithTag("PlayerShip").GetComponent<PlayerShipController>();
     }
 
-    public void Formation()
+    public void Formation(GameObject element, Transform spawnPoint)
     {
-
         float anchoArea = (new Vector2(playerShipController.xMax, 0.0f) - new Vector2(playerShipController.xMin, 0.0f)).magnitude;
         float altoArea = (new Vector2(0.0f, playerShipController.yMax) - new Vector2(0.0f, playerShipController.yMin)).magnitude;
-        float anchoNave = 1.2f;
-        float altoNave = 0.8f;
+        float anchoNave = 1f;
+        float altoNave = 1f;
         float restoAncho = anchoArea % anchoNave;
         float restoAlto = altoArea % altoNave;
         float navesMaxX = (anchoArea - restoAncho) / anchoNave;
         float navesMaxY = (altoArea - restoAlto) / altoNave;
-
+        bool isAsteroid = element.CompareTag("Asteroid");
         //Debug.Log(anchoArea + ", " + altoArea + "; " + restoAncho + ", " + restoAlto + ";" + navesMaxX + "," + navesMaxY);
 
         Vector3 startPosition = spawnPoint.position;
@@ -57,10 +54,26 @@ public class FormationConstructor : MonoBehaviour
             }
             LlenarX(newPosition, navesMaxX, anchoNave);
         }
+        int navesEnX = 0;
+        foreach (Vector3 position in spawneablePositions)
+        {
+            if (spawneablePositions[0].y == position.y)
+            {
+                navesEnX++;
+            }
+        }
+        float margenParaLlenarX = restoAncho / navesEnX;
+        for (int i = 0; i < spawneablePositions.Count; i++)
+        {
+            Vector3 vector = spawneablePositions[i];
+            vector.x = spawneablePositions[i].x + margenParaLlenarX;
+            spawneablePositions[i] = vector;
+        }
+        
         //----------------------------------------------//
         //Escogemos Formación   //y = (-3/7)x + (1/2)
         string selectedFormation = formations[Random.Range(0, formations.Length)];
-
+        Debug.Log(selectedFormation);
         switch (selectedFormation)
         {
             case "Single":

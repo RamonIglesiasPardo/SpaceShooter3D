@@ -3,16 +3,22 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public float waveRate;
+    public int level;
     public float waveStart;
+    public float spawnRate;
     private float wave;
+
     private FormationConstructor formations;
     private GameObject[] enemies;
+    private GameObject[] asteroids;
+    private PlayerShipController playerShipController;
     public Transform spawnPoint;
 
     private void Start()
     {
+        playerShipController = GameObject.FindGameObjectWithTag("PlayerShip").GetComponent<PlayerShipController>();
         enemies = Resources.LoadAll<GameObject>("Enemies");
+        asteroids = Resources.LoadAll<GameObject>("Asteroids/Prefabs");
         wave = Time.time + waveStart;
         formations = GetComponent<FormationConstructor>();
     }
@@ -20,20 +26,27 @@ public class Spawner : MonoBehaviour
     private void Update()
     {
         if (Time.time > wave)
-        {
-            spawnPoint.position = new Vector3(Random.Range(-3.5f, 3.5f), Random.Range(-1.0f, 2.0f), spawnPoint.position.z);
-            SpawnWave();
-            wave = Time.time + waveRate;
+        {            
+            GameObject element = (IsHardEnemy()) ? enemies[Random.Range(0, enemies.Length)] : asteroids[Random.Range(0, asteroids.Length)];
+            spawnPoint.position = new Vector3(playerShipController.xMin, playerShipController.yMin, spawnPoint.position.z);
+            SpawnWave(element);
+            wave = Time.time + spawnRate;
         }
     }
 
-    void SpawnWave()
+    private bool IsHardEnemy()
     {
-        formations.Formation();
-        GameObject enemy = enemies[Random.Range(0, enemies.Length)];
+        int probabilityEnemy = System.Math.Min(level * 1, 9);
+        int randomSelection = Random.Range(0, 10);
+        return randomSelection <= probabilityEnemy;
+    }
+
+    void SpawnWave(GameObject element)
+    {
+        formations.Formation(element, spawnPoint);
         foreach (Vector3 position in formations.positionsToSpawn)
         {
-            Instantiate(enemy, position, spawnPoint.rotation);
+            Instantiate(element, position, spawnPoint.rotation);
         }
         formations.positionsToSpawn.Clear();
     }
