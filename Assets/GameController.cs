@@ -11,4 +11,3 @@ public class GameController : MonoBehaviour
         Time.timeScale = pauseButton.pauseIsPressed ? 0.0f : 1.0f;
     }
 }
-
