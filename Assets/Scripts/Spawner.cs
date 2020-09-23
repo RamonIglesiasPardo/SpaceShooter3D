@@ -71,10 +71,12 @@ public class Spawner : MonoBehaviour
 
     void SpawnWave(GameObject element, List<Vector3> spawndablesPositionForElement)
     {
-        formations.Formation(element, spawndablesPositionForElement);
+        GameObject ele = formations.Formation(element, spawndablesPositionForElement);
         foreach (Vector3 position in formations.positionsToSpawn)
         {
-            Instantiate(element, position, this.transform.rotation);
+            GameObject go = Instantiate(ele, position, this.transform.rotation);
+            Rigidbody rb = go.GetComponent<Rigidbody>();
+            rb.velocity = Vector3.back * 150;
         }
         formations.positionsToSpawn.Clear();
     }
