@@ -74,6 +74,8 @@ public class Spawner : MonoBehaviour
         GameObject ele = formations.Formation(element, spawndablesPositionForElement);
         foreach (Vector3 position in formations.positionsToSpawn)
         {
+            ele.GetComponent<BasicBehavior>().inFormation = GetComponent<FormationConstructor>().formationInUse;
+
             GameObject go = Instantiate(ele, position, this.transform.rotation);
             Rigidbody rb = go.GetComponent<Rigidbody>();
             rb.velocity = Vector3.back * 150;

@@ -5,11 +5,13 @@ using UnityEngine;
 public class BasicBehavior : MonoBehaviour
 {
     public float speed;
+    public string inFormation;
     Rigidbody rb;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        Debug.Log(inFormation);
     }
 
     private void FixedUpdate()

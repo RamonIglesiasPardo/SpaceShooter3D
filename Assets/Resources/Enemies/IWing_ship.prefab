@@ -89,12 +89,13 @@ GameObject:
   m_Component:
   - component: {fileID: 7579987492687068955}
   - component: {fileID: -9152405217321331019}
-  - component: {fileID: 356758996659183618}
   - component: {fileID: 6927854948606253276}
   - component: {fileID: 7170788338055598655}
   - component: {fileID: -4423644848821394471}
+  - component: {fileID: 356758996659183618}
+  - component: {fileID: -1292691373928142500}
   m_Layer: 0
-  m_Name: Enemy_E
+  m_Name: IWing_ship
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -131,19 +132,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &356758996659183618
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6875553720089890056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8c97d61fdb519d4eaac7839a8b06b36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 20
 --- !u!65 &6927854948606253276
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -204,3 +192,28 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6875553720089890056}
   m_Mesh: {fileID: -2432090755550338912, guid: 6288eada988f6fd4d924545b62f84e5a, type: 3}
+--- !u!114 &356758996659183618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6875553720089890056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8c97d61fdb519d4eaac7839a8b06b36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 20
+--- !u!114 &-1292691373928142500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6875553720089890056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d914aa528b12d5148a1ad054c77d4196, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

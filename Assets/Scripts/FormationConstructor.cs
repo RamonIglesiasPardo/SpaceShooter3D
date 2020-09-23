@@ -6,13 +6,18 @@ public class FormationConstructor : MonoBehaviour
     public string[] formations;
     public List<Vector3> positionsToSpawn = new List<Vector3>();
 
+    public string formationInUse;
+
     public GameObject Formation(GameObject element, List<Vector3> spawneablePositions)
     {
         bool isAsteroid = element.CompareTag("Asteroid");
         string[] asteroidsFormations = {"Single", "Random" };
         string[] shipsFormations = { "Complete", "HLine", "VLine", "Cross", "LeftDownTri", "RightDownTri", "LeftUpTri", "RightUpTri" };
         string selectedFormation = isAsteroid? asteroidsFormations[Random.Range(0, asteroidsFormations.Length)] : shipsFormations[Random.Range(0, shipsFormations.Length)];
-        selectedFormation = "LeftDownTri";
+        //selectedFormation = "LeftDownTri";
+
+        formationInUse = selectedFormation;
+
         switch (selectedFormation)
         {
             case "Single":
