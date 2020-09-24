@@ -14,7 +14,7 @@ public class FormationConstructor : MonoBehaviour
         string[] asteroidsFormations = {"Single", "Random" };
         string[] shipsFormations = { "Complete", "HLine", "VLine", "Cross", "LeftDownTri", "RightDownTri", "LeftUpTri", "RightUpTri" };
         string selectedFormation = isAsteroid? asteroidsFormations[Random.Range(0, asteroidsFormations.Length)] : shipsFormations[Random.Range(0, shipsFormations.Length)];
-        //selectedFormation = "LeftDownTri";
+        //selectedFormation = "HLine";
 
         formationInUse = selectedFormation;
 

@@ -29,6 +29,7 @@ public class Spawner : MonoBehaviour
         if (Time.time > timeToStartNextWave && Application.isPlaying)
         {            
             GameObject element = (IsHardEnemy()) ? enemies[Random.Range(0, enemies.Length)] : asteroids[Random.Range(0, asteroids.Length)];
+            //element = enemies[0];
             List <Vector3> spawndablesPositionForElement = GetSpawndablesPositionForElement(element, 0.3f);
             SpawnWave(element , spawndablesPositionForElement);
             timeToStartNextWave = Time.time + spawnRate;
