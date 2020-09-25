@@ -8,6 +8,7 @@ namespace SlimUI.ModernMenu{
 	public class MainMenuNew : MonoBehaviour {
 
 		Animator CameraObject;
+		GameObject PlayerShip;
 
 		[Header("Loaded Scene")]
 		[Tooltip("The name of the scene in the build settings that will load")]
@@ -16,7 +17,7 @@ namespace SlimUI.ModernMenu{
 		public enum Theme {custom1, custom2, custom3};
 		[Header("Theme Settings")]
 		public Theme theme;
-		int themeIndex;
+		public int themeIndex;
 		public FlexibleUIData themeController;
 
 		[Header("Panels")]
@@ -82,13 +83,12 @@ namespace SlimUI.ModernMenu{
 
 		void Start(){
 			CameraObject = transform.GetComponent<Animator>();
-
 			playMenu.SetActive(false);
 			exitMenu.SetActive(false);
 			if(extrasMenu) extrasMenu.SetActive(false);
 			firstMenu.SetActive(true);
 			mainMenu.SetActive(true);
-
+			PlayerShip = GameObject.FindGameObjectWithTag("PlayerShip");
 		}
 
 		void Update(){
@@ -133,7 +133,8 @@ namespace SlimUI.ModernMenu{
 
 		public void NewGame(){
 			if(sceneName != ""){
-				StartCoroutine(LoadAsynchronously(sceneName));
+				StartCoroutine(LoadWithAnimation(sceneName));
+				//StartCoroutine(LoadAsynchronously(sceneName));
 				//SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
 			}
 		}
@@ -281,10 +282,46 @@ namespace SlimUI.ModernMenu{
 					if(Input.anyKeyDown){
 						operation.allowSceneActivation = true;
 					}
-				}
-				
+				}				
 				yield return null;
 			}
 		}
+		IEnumerator LoadWithAnimation(string sceneName){ 
+			AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
+			operation.allowSceneActivation = false;
+			mainCanvas.SetActive(false);			
+			//CameraObject.SetFloat("Animate", 3);
+			StartCoroutine(PlayerShip.GetComponent<Shake>().cShake(200f, 2f, PlayerShip.transform.position));
+			InvokeRepeating("StartEngineFX", 0.5f, 0.2f);
+			yield return new WaitForSeconds(2);
+			while (!operation.isDone)
+			{
+				//NaveSaleDisparada()
+				Vector3 ShipVector = PlayerShip.GetComponent<Transform>().TransformDirection(Vector3.forward);
+				PlayerShip.GetComponent<Rigidbody>().AddForce(ShipVector * 5000f, ForceMode.Acceleration);
+				yield return new WaitForSeconds(1);
+				operation.allowSceneActivation = true;
+				yield return null;
+			}
+		}	
+		private void StartEngineFX()
+        {
+			ParticleSystem ps = PlayerShip.GetComponentInChildren<ParticleSystem>();
+			var fx = ps.main;
+			var value = Random.value;
+			if (value < 0.2)
+            {
+				fx.startSize = 100;
+				fx.simulationSpeed = 10;				
+			} else if (value > 0.2 && value < 0.6)
+            {
+				fx.startSize = 5;
+				fx.simulationSpeed = 5;
+			} else
+            {
+				fx.startSize = 50;
+				fx.simulationSpeed = 8;
+			}			
+        }
 	}
 }

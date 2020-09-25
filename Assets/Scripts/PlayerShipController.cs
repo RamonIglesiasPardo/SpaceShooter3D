@@ -19,11 +19,15 @@ public class PlayerShipController : MonoBehaviour
         joystick = FindObjectOfType<Joystick>();
         joyButton = FindObjectOfType<JoyButton>();
         rb = GetComponent<Rigidbody>();
-        laserbeamControl = GameObject.FindGameObjectWithTag("LaserSystem").GetComponent<LaserBeamControl>();
+        laserbeamControl = GameObject.FindGameObjectWithTag("LaserSystem").GetComponent<LaserBeamControl>();       
     }
 
     private void FixedUpdate()
-    {
+    {   
+        if (transform.position.z < 0.0f)
+        {
+            transform.Translate(Vector3.forward * Time.deltaTime);
+        }
         float moveHorizontal = joystick.Horizontal + Input.GetAxis("Horizontal");
         float moveVertical = joystick.Vertical + Input.GetAxis("Vertical");
 
