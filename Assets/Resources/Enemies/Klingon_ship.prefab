@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 3762193928774686124}
   - component: {fileID: 5555011713140685148}
   - component: {fileID: 7316953742902726709}
-  - component: {fileID: 7133415568490713342}
   - component: {fileID: 6379841189347428833}
+  - component: {fileID: -6488092973209163370}
   m_Layer: 0
   m_Name: Klingon_ship
   m_TagString: Enemy
@@ -98,21 +98,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7133415568490713342
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3480424084864992713}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8c97d61fdb519d4eaac7839a8b06b36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 10
-  inFormation: HLine
-  speedFormation: 2
 --- !u!65 &6379841189347428833
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -126,3 +111,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.426104, y: 0.496784, z: 2.029035}
   m_Center: {x: 0, y: 0, z: 0.3557165}
+--- !u!114 &-6488092973209163370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3480424084864992713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8c97d61fdb519d4eaac7839a8b06b36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  inFormation: 
+  speedFormation: 3
