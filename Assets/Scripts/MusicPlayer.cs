@@ -7,7 +7,7 @@ public class MusicPlayer : MonoBehaviour
     private GameObject musicPlayer;
     void Awake()
     {
-        //When the scene loads it checks if there is an object called "MUSIC".
+        //When the scene loads it checks if there is an object called "MusicPlayerInstance".
         musicPlayer = GameObject.Find("MusicPlayerInstance");
         if (musicPlayer == null)
         {
