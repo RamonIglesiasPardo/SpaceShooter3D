@@ -5,25 +5,25 @@ using UnityEngine;
 
 public class LaserBeamControl : MonoBehaviour
 {
-    public Component[] lineRenderers;
+    public GameObject[] gameObjects;
     
     // Start is called before the first frame update
     void Start()
     {
-        lineRenderers = GetComponentsInChildren<LineRenderer>();
-        foreach (LineRenderer element in lineRenderers)
+        gameObjects = GameObject.FindGameObjectsWithTag("Laser");
+        foreach (GameObject obj in gameObjects)
         {
-            element.enabled = false;
+            obj.SetActive(false);
         }
     }
 
     public void SwitchLaserBeam ()
     {
-        foreach (LineRenderer element in lineRenderers)
+        foreach (GameObject obj in gameObjects)
         {
-            if (!element.enabled)
+            if (!obj.activeSelf)
             {
-                element.enabled = true;
+                obj.SetActive(true);
                 StartCoroutine(FireTime());
             }
         }
@@ -32,9 +32,9 @@ public class LaserBeamControl : MonoBehaviour
     IEnumerator FireTime()
     {
         yield return new WaitForSeconds(0.3f);
-        foreach (LineRenderer element in lineRenderers)
+        foreach (GameObject obj in gameObjects)
         {
-            element.enabled = false;
+            obj.SetActive(false);
         }
         
     }

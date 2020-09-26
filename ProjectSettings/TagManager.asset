@@ -11,6 +11,8 @@ TagManager:
   - Canvas
   - Joystick
   - ControlButton
+  - Enemy
+  - Laser
   layers:
   - Default
   - TransparentFX
