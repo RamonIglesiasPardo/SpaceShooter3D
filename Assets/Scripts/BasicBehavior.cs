@@ -10,12 +10,13 @@ public class BasicBehavior : MonoBehaviour
     bool descending = false;
     public float speedFormation;
     Vector3 inFormVel;
+    public int liveCount;
 
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        Debug.Log(inFormation);
+        //Debug.Log(inFormation);
     }
 
 
@@ -63,5 +64,18 @@ public class BasicBehavior : MonoBehaviour
         }
 
         rb.velocity += inFormVel;
+    }
+
+    public void HitCount()
+    {
+        Debug.Log("<color=green> BaseEnemyBehavior: </color>" + ": Tenia = " + liveCount + " | le quedan = " + --liveCount);
+        liveCount -= 1;
+        if (liveCount <= 0)
+        {
+            //Instantiate explosion
+            Debug.Log("<color=green> BaseEnemyBehavior: </color>" + ": Destruido!");
+            Destroy(this.gameObject);
+            
+        }
     }
 }

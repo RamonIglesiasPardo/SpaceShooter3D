@@ -126,3 +126,4 @@ MonoBehaviour:
   speed: 10
   inFormation: 
   speedFormation: 3
+  liveCount: 2

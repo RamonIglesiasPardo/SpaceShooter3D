@@ -125,6 +125,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
+  inFormation: Complete
+  speedFormation: 0
+  liveCount: 2
 --- !u!114 &1326565831318701718
 MonoBehaviour:
   m_ObjectHideFlags: 0

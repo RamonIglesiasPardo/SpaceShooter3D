@@ -206,3 +206,4 @@ MonoBehaviour:
   speed: 10
   inFormation: HLine
   speedFormation: 2
+  liveCount: 6
