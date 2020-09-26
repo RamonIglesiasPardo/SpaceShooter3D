@@ -219,6 +219,7 @@ namespace SlimUI.ModernMenu{
 
 		public void MusicSlider (){
 			PlayerPrefs.SetFloat("MusicVolume", sliderValue);
+			GameObject.Find("MusicPlayerInstance").GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("MusicVolume");
 		}
 
 		public void  SensitivityXSlider (){

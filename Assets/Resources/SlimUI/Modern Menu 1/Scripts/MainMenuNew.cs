@@ -145,11 +145,11 @@ namespace SlimUI.ModernMenu{
 
 		public void  Position2 (){
 			DisablePlayCampaign();
-			CameraObject.SetFloat("Animate",1);
+			CameraObject.SetFloat("SettingsAnimation",1);
 		}
 
 		public void  Position1 (){
-			CameraObject.SetFloat("Animate",0);
+			CameraObject.SetFloat("SettingsAnimation", 0);
 		}
 
 		public void  GamePanel (){
@@ -271,11 +271,9 @@ namespace SlimUI.ModernMenu{
 			operation.allowSceneActivation = false;
 			mainCanvas.SetActive(false);
 			loadingMenu.SetActive(true);
-
 			while (!operation.isDone){
 				float progress = Mathf.Clamp01(operation.progress / .9f);
 				loadBar.value = progress;
-
 				if(operation.progress >= 0.9f){
 					finishedLoadingText.gameObject.SetActive(true);
 
@@ -290,16 +288,15 @@ namespace SlimUI.ModernMenu{
 			AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
 			operation.allowSceneActivation = false;
 			mainCanvas.SetActive(false);			
-			//CameraObject.SetFloat("Animate", 3);
-			StartCoroutine(PlayerShip.GetComponent<Shake>().cShake(200f, 2f, PlayerShip.transform.position));
+			CameraObject.SetBool("PlayerShipAnimation", true);
+			StartCoroutine(PlayerShip.GetComponent<Shake>().cShake(200f, 6f, PlayerShip.transform.position));
 			InvokeRepeating("StartEngineFX", 0.5f, 0.2f);
-			yield return new WaitForSeconds(2);
+			yield return new WaitForSeconds(3);
 			while (!operation.isDone)
 			{
-				//NaveSaleDisparada()
 				Vector3 ShipVector = PlayerShip.GetComponent<Transform>().TransformDirection(Vector3.forward);
 				PlayerShip.GetComponent<Rigidbody>().AddForce(ShipVector * 5000f, ForceMode.Acceleration);
-				yield return new WaitForSeconds(1);
+				yield return new WaitForSeconds(0.5f);
 				operation.allowSceneActivation = true;
 				yield return null;
 			}
