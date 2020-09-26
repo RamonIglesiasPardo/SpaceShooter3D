@@ -125,5 +125,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   inFormation: 
+  scoreValue: 1000
   speedFormation: 3
   liveCount: 2
+  hitExplosion: {fileID: 100014, guid: a57a6829db3568c4d9bdc37e9e63c017, type: 3}
+  destroyExplosion: {fileID: 100006, guid: 28ccd38a41e256a4e8fea96f5a8d039d, type: 3}

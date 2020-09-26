@@ -13,6 +13,11 @@ TagManager:
   - ControlButton
   - Enemy
   - Laser
+  - Asteroid
+  - FxTemporaire
+  - Limit
+  - scoreText
+  - Life
   layers:
   - Default
   - TransparentFX

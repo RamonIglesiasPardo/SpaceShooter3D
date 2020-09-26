@@ -204,6 +204,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  inFormation: HLine
+  inFormation: Complete
+  scoreValue: 5000
   speedFormation: 2
-  liveCount: 6
+  liveCount: 106
+  hitExplosion: {fileID: 100014, guid: a57a6829db3568c4d9bdc37e9e63c017, type: 3}
+  destroyExplosion: {fileID: 100006, guid: 28ccd38a41e256a4e8fea96f5a8d039d, type: 3}

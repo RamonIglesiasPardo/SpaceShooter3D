@@ -6,16 +6,20 @@ public class BasicBehavior : MonoBehaviour
 {
     public float speed;
     public string inFormation;
+    public int scoreValue;
     Rigidbody rb;
     bool descending = false;
     public float speedFormation;
     Vector3 inFormVel;
     public int liveCount;
-
+    public GameObject hitExplosion;
+    public GameObject destroyExplosion;
+    private GameController gameController;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
         //Debug.Log(inFormation);
     }
 
@@ -39,6 +43,7 @@ public class BasicBehavior : MonoBehaviour
         if (other.gameObject.CompareTag("PlayerShip"))
         {
             Debug.Log("<color=green>BaseEnemyBehavior: </color>Collision detected with player!!");
+            Instantiate(destroyExplosion, transform.position, transform.rotation);
             Destroy(gameObject);
         }
     }
@@ -62,20 +67,23 @@ public class BasicBehavior : MonoBehaviour
         {
             inFormVel = new Vector3(0.0f, 1 * speedFormation, 0.0f);
         }
-
         rb.velocity += inFormVel;
     }
 
     public void HitCount()
     {
         Debug.Log("<color=green> BaseEnemyBehavior: </color>" + ": Tenia = " + liveCount + " | le quedan = " + --liveCount);
+        
         liveCount -= 1;
         if (liveCount <= 0)
         {
-            //Instantiate explosion
+            Instantiate(destroyExplosion, transform.position, transform.rotation);
             Debug.Log("<color=green> BaseEnemyBehavior: </color>" + ": Destruido!");
             Destroy(this.gameObject);
-            
+            gameController.IncreasePoints(scoreValue);
+        } else
+        {
+            Instantiate(hitExplosion, transform.position, transform.rotation);                
         }
     }
 }
