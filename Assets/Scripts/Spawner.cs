@@ -10,9 +10,11 @@ public class Spawner : MonoBehaviour
     public float waveStart;
     public float spawnRate;
     public bool isSpawning;
-    public bool spawn3DText;
+    public bool is3DTextSpawning;
     private float timeToStartNextWave;
+    private bool shouldStop;
 
+    private GameObject gameObject3DTextInstance;
     public GameObject gameObjectText3D;
     private FormationConstructor formations;
     private GameObject[] enemies;
@@ -37,6 +39,14 @@ public class Spawner : MonoBehaviour
             List <Vector3> spawndablesPositionForElement = GetSpawndablesPositionForElement(element, 0.3f);
             SpawnWave(element , spawndablesPositionForElement);
             timeToStartNextWave = Time.time + spawnRate;
+        }
+        if (shouldStop && is3DTextSpawning)
+        {
+            if(gameObject3DTextInstance.transform.position.z <= 3)
+            {
+                gameObject3DTextInstance.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                is3DTextSpawning = false;
+            }
         }
     }
 
@@ -88,17 +98,15 @@ public class Spawner : MonoBehaviour
         formations.positionsToSpawn.Clear();
     }
 
-    public void Spawn3DText(string text)
-    {        
-        GameObject go = Instantiate(gameObjectText3D, new Vector3(0,0, this.transform.position.z), Quaternion.identity);
-        go.GetComponent<SimpleHelvetica>().Text = "textsdasd";
-        Rigidbody rb = go.GetComponent<Rigidbody>();
-        rb.velocity = Vector3.back * 15;
-        StartCoroutine(SetText3D(go, text));
-    }
-    IEnumerator SetText3D(GameObject go, string text)
-    {      
-        yield return new WaitForSeconds(2);
-        go.GetComponent<SimpleHelvetica>().Text = "textsdasd";
+    public void Spawn3DText(string text, bool shouldStop, float distanceToStop)
+    {
+        this.shouldStop = shouldStop;
+        gameObject3DTextInstance = Instantiate(gameObjectText3D, new Vector3(0,0, this.transform.position.z), Quaternion.identity);
+        SimpleHelvetica simpleHelvetica = gameObject3DTextInstance.GetComponent<SimpleHelvetica>();
+        simpleHelvetica.SetText(text);
+        simpleHelvetica.Reset();        
+        Rigidbody rb = gameObject3DTextInstance.GetComponent<Rigidbody>();
+        rb.velocity = Vector3.back * 20;
+        is3DTextSpawning = true;
     }
 }

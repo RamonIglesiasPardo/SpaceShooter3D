@@ -88,7 +88,7 @@ public class GameController : MonoBehaviour
         AcelerateRemainingEnemies();
         //  paraeljuego
         //  mostrarpuntuancion
-        spawner.Spawn3DText("text");
+        spawner.Spawn3DText("Game\nOver", true, 20f);
         new Score().AddNewScore(new Score(PlayerPrefs.GetString("PlayerName"), DateTime.Now, score));
         StartCoroutine(AnyKeyToBackMenu());
     }

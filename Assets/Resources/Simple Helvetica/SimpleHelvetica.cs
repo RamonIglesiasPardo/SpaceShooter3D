@@ -9,7 +9,8 @@ using System.Collections;
 [ExecuteInEditMode]
 public class SimpleHelvetica : MonoBehaviour {
 	
-	public string Text = "SIMPLE HELVETICA\n \nby Studio Pepwuper";
+	//public string Text = "SIMPLE HELVETICA\n \nby Studio Pepwuper";
+	public string Text = "";
 	[HideInInspector]
 	public float CharacterSpacing = 4f; //spacing between the characters
 	[HideInInspector]
@@ -61,14 +62,17 @@ public class SimpleHelvetica : MonoBehaviour {
 	}
 	
 	//Reset is called when the reset button is clicked on the inspector
-	void Reset(){
+	public void Reset(){
 		
 		RemoveBoxCollider();
 		RemoveRigidbody();
 		GenerateText();	
 		
 	}
-	
+	public void SetText(string text)
+    {
+		this.Text = text;
+    }
 	
 	//Generate New 3D Text
 	public void GenerateText() {
@@ -204,7 +208,7 @@ public class SimpleHelvetica : MonoBehaviour {
 		foreach(Transform childTransform in previousLetters){
 			if (childTransform.name != "_Alphabets" && childTransform.name != transform.name && childTransform.parent.name != "_Alphabets"){
 				//Debug.Log("previous letter: "+childTransform.name);
-				DestroyImmediate(childTransform.gameObject);	
+				Destroy(childTransform.gameObject);	
 			}
 			
 		}
