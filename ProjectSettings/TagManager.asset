@@ -18,6 +18,9 @@ TagManager:
   - Limit
   - scoreText
   - Life
+  - ScoreName
+  - ScoreDate
+  - ScoreScore
   layers:
   - Default
   - TransparentFX
