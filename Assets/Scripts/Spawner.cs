@@ -8,6 +8,7 @@ public class Spawner : MonoBehaviour
     public int level;
     public float waveStart;
     public float spawnRate;
+    public bool isSpawning;
     private float timeToStartNextWave;
 
     private FormationConstructor formations;
@@ -26,7 +27,7 @@ public class Spawner : MonoBehaviour
 
     private void Update()
     {
-        if (Time.time > timeToStartNextWave && Application.isPlaying)
+        if (Time.time > timeToStartNextWave && Application.isPlaying && isSpawning)
         {            
             GameObject element = (IsHardEnemy()) ? enemies[Random.Range(0, enemies.Length)] : asteroids[Random.Range(0, asteroids.Length)];
             //element = enemies[0];

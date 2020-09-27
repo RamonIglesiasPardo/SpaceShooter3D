@@ -1,24 +1,26 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
     public PauseButton pauseButton;
-    public Image[] lives;
-    int livesCount;
     private TextMeshProUGUI scoreHUD;
+    public Image[] lives;
+    private int livesCount;
     private int score;
-    int tmp = 0;
-    PlayerShipController player;
+    private bool isBackToMenuAllowed;
+
+    Spawner spawner;
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("PlayerShip").GetComponent<PlayerShipController>();
+        spawner = GameObject.FindGameObjectWithTag("Spawner").GetComponent<Spawner>();
         scoreHUD = GameObject.FindGameObjectWithTag("scoreText").GetComponent<TMPro.TextMeshProUGUI>();
         score = 0;
+        isBackToMenuAllowed = false;
         scoreHUD.SetText(score.ToString());
         livesCount = 3;
         //Canvas CanvasObject = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Canvas>();
@@ -45,10 +47,9 @@ public class GameController : MonoBehaviour
     private void Update()
     {
         Time.timeScale = pauseButton.pauseIsPressed ? 0.0f : 1.0f;
-        //IncreaseScore();
-        
+        if (Input.anyKey && isBackToMenuAllowed) SceneManager.LoadScene(0);
     }
-
+    private int tmp = 0;
     public void IncreasePoints(int points)
     {
         tmp = score;
@@ -81,13 +82,35 @@ public class GameController : MonoBehaviour
         }
     }
 
-    internal void GameOver()
+    public void GameOver()
     {
+        spawner.isSpawning = false;
+        AcelerateRemainingEnemies();
 
+        
         //  paraeljuego
         //  mostrarpuntuancion
-        new Score().AddNewScore(new Score(PlayerPrefs.GetString("PlayerName"), DateTime.Now, score));        
-       
-        //  pulsarcualquiercosareturnmenupricipal
+        new Score().AddNewScore(new Score(PlayerPrefs.GetString("PlayerName"), DateTime.Now, score));
+        StartCoroutine(AnyKeyToBackMenu());
+    }
+    private void AcelerateRemainingEnemies()
+    {
+        float force = 5000f;
+        GameObject[] asteroids = GameObject.FindGameObjectsWithTag("Asteroid");
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach(GameObject asteroid in asteroids)
+        {
+            asteroid.GetComponent<Rigidbody>().AddForce(asteroid.transform.forward * force);
+        }
+        foreach (GameObject enemy in enemies)
+        {
+            enemy.GetComponent<Rigidbody>().AddForce(enemy.transform.forward * force, ForceMode.Acceleration);
+        }
+    }
+
+    IEnumerator AnyKeyToBackMenu()
+    {        
+        yield return new WaitForSeconds(3);
+        isBackToMenuAllowed = true;        
     }
 }

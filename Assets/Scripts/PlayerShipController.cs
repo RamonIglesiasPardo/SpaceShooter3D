@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Xml.Schema;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 public class PlayerShipController : MonoBehaviour
 {
@@ -72,8 +68,7 @@ public class PlayerShipController : MonoBehaviour
                 lives = 0;
                 Instantiate(playerExplosion, transform.position, transform.rotation);
                 Destroy(gameObject);
-                gameController.GameOver();                
-                SceneManager.LoadScene(0);
+                gameController.GameOver();             
                 isTriggered = false;
             }
             if(isTriggered) gameController.ShowHUDLives(lives);
