@@ -54,8 +54,6 @@ namespace SlimUI.ModernMenu{
 		public GameObject firstMenu;
 		[Tooltip("The Menu for when the PLAY button is clicked")]
 		public GameObject playMenu;
-		[Tooltip("The Menu for when the EXIT button is clicked")]
-		public GameObject exitMenu;
 		[Tooltip("Optional 4th Menu")]
 		public GameObject extrasMenu;
 
@@ -84,7 +82,6 @@ namespace SlimUI.ModernMenu{
 		void Start(){
 			CameraObject = transform.GetComponent<Animator>();
 			playMenu.SetActive(false);
-			exitMenu.SetActive(false);
 			if(extrasMenu) extrasMenu.SetActive(false);
 			firstMenu.SetActive(true);
 			mainMenu.SetActive(true);
@@ -112,13 +109,11 @@ namespace SlimUI.ModernMenu{
 		}
 
 		public void  PlayCampaign (){
-			exitMenu.SetActive(false);
 			if(extrasMenu) extrasMenu.SetActive(false);
 			playMenu.SetActive(true);
 		}
 		
 		public void  PlayCampaignMobile (){
-			exitMenu.SetActive(false);
 			if(extrasMenu) extrasMenu.SetActive(false);
 			playMenu.SetActive(true);
 			mainMenu.SetActive(false);
@@ -127,7 +122,6 @@ namespace SlimUI.ModernMenu{
 		public void  ReturnMenu (){
 			playMenu.SetActive(false);
 			if(extrasMenu) extrasMenu.SetActive(false);
-			exitMenu.SetActive(false);
 			mainMenu.SetActive(true);
 		}
 
@@ -242,29 +236,31 @@ namespace SlimUI.ModernMenu{
 			swooshSound.GetComponent<AudioSource>().Play();
 		}
 
-		// Are You Sure - Quit Panel Pop Up
-		public void  AreYouSure (){
-			exitMenu.SetActive(true);
-			if(extrasMenu) extrasMenu.SetActive(false);
-			DisablePlayCampaign();
+        public void Quit()
+        {
+			Application.Quit();
+		}
+
+		public void ScoreToMainMenu()
+		{
+			CameraObject.SetBool("MainMenuToScore", false);
+			CameraObject.SetBool("ScoreToMainMenu", true);			
+		}
+
+		public void MainMenuToScore()
+		{
+			CameraObject.SetBool("MainMenuToScore", true);
+			CameraObject.SetBool("ScoreToMainMenu", false);
+						
 		}
 
 		public void  AreYouSureMobile (){
-			exitMenu.SetActive(true);
 			if(extrasMenu) extrasMenu.SetActive(false);
 			mainMenu.SetActive(false);
 			DisablePlayCampaign();
 		}
 
-		public void ExtrasMenu(){
-			playMenu.SetActive(false);
-			if(extrasMenu) extrasMenu.SetActive(true);
-			exitMenu.SetActive(false);
-		}
 
-		public void  Yes (){
-			Application.Quit();
-		}
 
 		IEnumerator LoadAsynchronously (string sceneName){ // scene name is just the name of the current scene being loaded
 			AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
