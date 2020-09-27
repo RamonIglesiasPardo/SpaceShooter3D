@@ -61,24 +61,22 @@ public class PlayerShipController : MonoBehaviour
             shoot = false;
         }
     }
+    private bool isTriggered = true;
     private void OnTriggerEnter(Collider other)
     {
         if (!other.gameObject.CompareTag("Limit"))
         {
             lives--;            
-            if (lives <= 0)
+            if (lives <= 0 && isTriggered)
             {
                 lives = 0;
                 Instantiate(playerExplosion, transform.position, transform.rotation);
                 Destroy(gameObject);
-                //gameController.GameOver(
-                //  paraeljuego
-                //  mostrarpuntuancion
-                //  new Score().AddNewScore(new Score("Paco is back", DateTime.Now, 9998));
-                //  pulsarcualquiercosareturnmenupricipal
+                gameController.GameOver();                
                 SceneManager.LoadScene(0);
+                isTriggered = false;
             }
-            gameController.ShowHUDLives(lives);
+            if(isTriggered) gameController.ShowHUDLives(lives);
         }
     }
     //Pendiente de buscar que tumblee cuando impacta la nave del jugador con un enemigo/asteroide

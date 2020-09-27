@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -80,4 +81,13 @@ public class GameController : MonoBehaviour
         }
     }
 
+    internal void GameOver()
+    {
+
+        //  paraeljuego
+        //  mostrarpuntuancion
+        new Score().AddNewScore(new Score("Player Name", DateTime.Now, score));        
+       
+        //  pulsarcualquiercosareturnmenupricipal
+    }
 }

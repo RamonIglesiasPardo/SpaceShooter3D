@@ -69,6 +69,11 @@ namespace SlimUI.ModernMenu{
 			}
 
 			// check slider values
+			if (!PlayerPrefs.HasKey("MusicVolume"))
+			{
+				PlayerPrefs.SetFloat("MusicVolume", 0.2f);
+				GameObject.Find("MusicPlayerInstance").GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("MusicVolume");
+			}
 			musicSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("MusicVolume");
 			sensitivityXSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("XSensitivity");
 			sensitivityYSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("YSensitivity");
@@ -83,7 +88,8 @@ namespace SlimUI.ModernMenu{
 			}
 
 			// check hud value
-			if(PlayerPrefs.GetInt("ShowHUD")==0){
+			if (!PlayerPrefs.HasKey("ShowHUD")) PlayerPrefs.SetInt("ShowHUD", 1);
+			if (PlayerPrefs.GetInt("ShowHUD")==0){
 				showhudtext.GetComponent<TMP_Text>().text = "off";
 			}
 			else{
