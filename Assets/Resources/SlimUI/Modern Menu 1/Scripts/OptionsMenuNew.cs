@@ -50,6 +50,9 @@ namespace SlimUI.ModernMenu{
 		public GameObject sensitivityYSlider;
 		public GameObject mouseSmoothSlider;
 
+		[Header("INPUTS")]
+		public GameObject playerNameInput;
+
 		private float sliderValue = 0.0f;
 		private float sliderValueXSensitivity = 0.0f;
 		private float sliderValueYSensitivity = 0.0f;
@@ -66,6 +69,15 @@ namespace SlimUI.ModernMenu{
 			{
 				difficultyhardcoretextLINE.gameObject.SetActive(true);
 				difficultynormaltextLINE.gameObject.SetActive(false);
+			}
+
+			// check slider values
+			if (!PlayerPrefs.HasKey("PlayerName"))
+			{
+				PlayerPrefs.SetString("PlayerName", "Player");
+			} else
+            {
+				playerNameInput.GetComponent<TMPro.TMP_InputField>().text = PlayerPrefs.GetString("PlayerName");
 			}
 
 			// check slider values
@@ -221,6 +233,11 @@ namespace SlimUI.ModernMenu{
 			else if(Screen.fullScreen == false){
 				fullscreentext.GetComponent<TMP_Text>().text = "off";
 			}
+		}
+
+		public void SetPlayerName()
+        {
+			PlayerPrefs.SetString("PlayerName", playerNameInput.GetComponent<TMPro.TMP_InputField>().text);
 		}
 
 		public void MusicSlider (){

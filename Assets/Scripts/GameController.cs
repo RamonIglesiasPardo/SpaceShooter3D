@@ -86,7 +86,7 @@ public class GameController : MonoBehaviour
 
         //  paraeljuego
         //  mostrarpuntuancion
-        new Score().AddNewScore(new Score("Player Name", DateTime.Now, score));        
+        new Score().AddNewScore(new Score(PlayerPrefs.GetString("PlayerName"), DateTime.Now, score));        
        
         //  pulsarcualquiercosareturnmenupricipal
     }
