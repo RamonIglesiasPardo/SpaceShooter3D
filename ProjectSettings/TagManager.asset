@@ -21,6 +21,7 @@ TagManager:
   - ScoreName
   - ScoreDate
   - ScoreScore
+  - ScoreRank
   layers:
   - Default
   - TransparentFX

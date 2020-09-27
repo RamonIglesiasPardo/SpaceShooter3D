@@ -74,7 +74,7 @@ public class PlayerShipController : MonoBehaviour
                 //gameController.GameOver(
                 //  paraeljuego
                 //  mostrarpuntuancion
-                //  persistirlapuntaciónparalosrankings
+                //  new Score().AddNewScore(new Score("Paco is back", DateTime.Now, 9998));
                 //  pulsarcualquiercosareturnmenupricipal
                 SceneManager.LoadScene(0);
             }
