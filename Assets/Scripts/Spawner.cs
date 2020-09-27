@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -9,8 +10,10 @@ public class Spawner : MonoBehaviour
     public float waveStart;
     public float spawnRate;
     public bool isSpawning;
+    public bool spawn3DText;
     private float timeToStartNextWave;
 
+    public GameObject gameObjectText3D;
     private FormationConstructor formations;
     private GameObject[] enemies;
     private GameObject[] asteroids;
@@ -71,7 +74,7 @@ public class Spawner : MonoBehaviour
         return randomSelection <= probabilitySpawnHardEnemy;
     }
 
-    void SpawnWave(GameObject element, List<Vector3> spawndablesPositionForElement)
+    public void SpawnWave(GameObject element, List<Vector3> spawndablesPositionForElement)
     {
         GameObject ele = formations.Formation(element, spawndablesPositionForElement);
         foreach (Vector3 position in formations.positionsToSpawn)
@@ -83,5 +86,19 @@ public class Spawner : MonoBehaviour
             rb.velocity = Vector3.back * 150;
         }
         formations.positionsToSpawn.Clear();
+    }
+
+    public void Spawn3DText(string text)
+    {        
+        GameObject go = Instantiate(gameObjectText3D, new Vector3(0,0, this.transform.position.z), Quaternion.identity);
+        go.GetComponent<SimpleHelvetica>().Text = "textsdasd";
+        Rigidbody rb = go.GetComponent<Rigidbody>();
+        rb.velocity = Vector3.back * 15;
+        StartCoroutine(SetText3D(go, text));
+    }
+    IEnumerator SetText3D(GameObject go, string text)
+    {      
+        yield return new WaitForSeconds(2);
+        go.GetComponent<SimpleHelvetica>().Text = "textsdasd";
     }
 }

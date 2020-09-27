@@ -86,10 +86,9 @@ public class GameController : MonoBehaviour
     {
         spawner.isSpawning = false;
         AcelerateRemainingEnemies();
-
-        
         //  paraeljuego
         //  mostrarpuntuancion
+        spawner.Spawn3DText("text");
         new Score().AddNewScore(new Score(PlayerPrefs.GetString("PlayerName"), DateTime.Now, score));
         StartCoroutine(AnyKeyToBackMenu());
     }

@@ -1910,6 +1910,8 @@ MonoBehaviour:
   waveStart: 0
   spawnRate: 1
   isSpawning: 1
+  spawn3DText: 0
+  gameObjectText3D: {fileID: 100218, guid: ce72191ecb9a24885b5711cd938314a3, type: 3}
 --- !u!4 &1329899633
 Transform:
   m_ObjectHideFlags: 0
