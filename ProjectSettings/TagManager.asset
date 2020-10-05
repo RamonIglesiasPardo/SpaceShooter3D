@@ -23,6 +23,8 @@ TagManager:
   - ScoreScore
   - ScoreRank
   - ScorePanel
+  - PowerUpVelocity
+  - PowerUpLive
   layers:
   - Default
   - TransparentFX

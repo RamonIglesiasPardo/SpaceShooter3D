@@ -62,14 +62,29 @@ public class PlayerShipController : MonoBehaviour
     {
         if (!other.gameObject.CompareTag("Limit"))
         {
-            lives--;            
-            if (lives <= 0 && isTriggered)
+            if (other.gameObject.CompareTag("PowerUpLive"))
             {
-                lives = 0;
-                Instantiate(playerExplosion, transform.position, transform.rotation);
-                Destroy(gameObject);
-                gameController.GameOver();             
-                isTriggered = false;
+d                Debug.Log("<color=red>BaseEnemyBehavior: </color>PowerUpLive with player!!");                
+                lives = lives++;
+                gameController.ShowHUDLives(lives);
+            }
+            else if (other.gameObject.CompareTag("PowerUpVelocity"))
+            {
+
+                Debug.Log("<color=blue>BaseEnemyBehavior: </color>PowerUpSpeed with player!!");
+                speed = speed * 2;
+            }
+            else
+            {
+                lives--;
+                if (lives <= 0 && isTriggered)
+                {
+                    lives = 0;
+                    Instantiate(playerExplosion, transform.position, transform.rotation);
+                    Destroy(gameObject);
+                    gameController.GameOver();
+                    isTriggered = false;
+                }
             }
             if(isTriggered) gameController.ShowHUDLives(lives);
         }

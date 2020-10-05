@@ -8,10 +8,12 @@ public class Spawner : MonoBehaviour
 {
     public int level;
     public float waveStart;
-    public float spawnRate;
+    public float spawnRateEnemies;
+    public float spawnRatePowerUps;
     public bool isSpawning;
     public bool is3DTextSpawning;
     private float timeToStartNextWave;
+    private float timetoSendPowerUp;
     private bool shouldStop;
 
     private GameObject gameObject3DTextInstance;
@@ -19,6 +21,7 @@ public class Spawner : MonoBehaviour
     private FormationConstructor formations;
     private GameObject[] enemies;
     private GameObject[] asteroids;
+    private GameObject[] powerups;
     private PlayerShipController playerShipController;
 
     private void Start()
@@ -26,7 +29,9 @@ public class Spawner : MonoBehaviour
         playerShipController = GameObject.FindGameObjectWithTag("PlayerShip").GetComponent<PlayerShipController>();
         enemies = Resources.LoadAll<GameObject>("Enemies");
         asteroids = Resources.LoadAll<GameObject>("Asteroids/Prefabs");
+        powerups = Resources.LoadAll<GameObject>("PowerUp/Prefabs/PowerupsShooter");
         timeToStartNextWave = Time.time + waveStart;
+        timetoSendPowerUp = timeToStartNextWave * 2;
         formations = GetComponent<FormationConstructor>();
     }
 
@@ -38,7 +43,7 @@ public class Spawner : MonoBehaviour
             //element = enemies[0];
             List <Vector3> spawndablesPositionForElement = GetSpawndablesPositionForElement(element, 0.3f);
             SpawnWave(element , spawndablesPositionForElement);
-            timeToStartNextWave = Time.time + spawnRate;
+            timeToStartNextWave = Time.time + spawnRateEnemies;
         }
         if (shouldStop && is3DTextSpawning)
         {
@@ -47,6 +52,16 @@ public class Spawner : MonoBehaviour
                 gameObject3DTextInstance.GetComponent<Rigidbody>().velocity = Vector3.zero;
                 is3DTextSpawning = false;
             }
+        }
+        if (Time.time > timetoSendPowerUp && Application.isPlaying && isSpawning)
+        {
+            GameObject element = powerups[Random.Range(0, powerups.Length)];
+            Vector3 spawnPosition = new Vector3(Random.Range(playerShipController.xMin, playerShipController.xMax), Random.Range(playerShipController.yMin, playerShipController.yMax) - 5.2f, element.transform.position.z);
+            Quaternion spawnRotation = Quaternion.identity;
+            GameObject go = Instantiate(element, spawnPosition, spawnRotation);
+            Rigidbody rb = go.GetComponent<Rigidbody>();
+            rb.velocity = Vector3.back * 10;
+            timetoSendPowerUp = (Time.time + spawnRatePowerUps) * 1;
         }
     }
 

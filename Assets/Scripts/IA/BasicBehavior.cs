@@ -40,7 +40,7 @@ public class BasicBehavior : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("PlayerShip"))
+        if (other.gameObject.CompareTag("PlayerShip") && !other.gameObject.CompareTag("PowerUpLive") && !other.gameObject.CompareTag("PowerUpVelocity"))
         {
             Debug.Log("<color=green>BaseEnemyBehavior: </color>Collision detected with player!!");
             Instantiate(destroyExplosion, transform.position, transform.rotation);
