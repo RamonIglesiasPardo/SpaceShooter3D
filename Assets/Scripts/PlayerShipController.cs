@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class PlayerShipController : MonoBehaviour
 {
@@ -13,12 +14,15 @@ public class PlayerShipController : MonoBehaviour
     private LaserBeamControl laserbeamControl;
     public float tumble;
     public int lives;
+    protected bool inmune;
+    public int timeInmune;
     GameController gameController;
 
     private void Start()
     {
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         lives = 3;
+        timeInmune = 20;
         gameController.ShowHUDLives(lives);
         joystick = FindObjectOfType<Joystick>();
         joyButton = FindObjectOfType<JoyButton>();
@@ -64,29 +68,40 @@ public class PlayerShipController : MonoBehaviour
         {
             if (other.gameObject.CompareTag("PowerUpLive"))
             {
-d                Debug.Log("<color=red>BaseEnemyBehavior: </color>PowerUpLive with player!!");                
-                lives = lives++;
-                gameController.ShowHUDLives(lives);
+                Debug.Log("<color=red>BaseEnemyBehavior: </color>PowerUpLive with player!!");
+                if (lives < 5)
+                {
+                    lives = lives + 1;
+                    gameController.ShowHUDLives(lives);
+                }
             }
             else if (other.gameObject.CompareTag("PowerUpVelocity"))
             {
-
-                Debug.Log("<color=blue>BaseEnemyBehavior: </color>PowerUpSpeed with player!!");
-                speed = speed * 2;
+                StartCoroutine (Inmune ());
             }
             else
             {
-                lives--;
-                if (lives <= 0 && isTriggered)
+                if (!inmune)
                 {
-                    lives = 0;
-                    Instantiate(playerExplosion, transform.position, transform.rotation);
-                    Destroy(gameObject);
-                    gameController.GameOver();
-                    isTriggered = false;
+                    lives--;
+                    if (lives <= 0 && isTriggered)
+                    {
+                        lives = 0;
+                        Instantiate(playerExplosion, transform.position, transform.rotation);
+                        Destroy(gameObject);
+                        gameController.GameOver();
+                        isTriggered = false;
+                    }
                 }
             }
             if(isTriggered) gameController.ShowHUDLives(lives);
+        }
+        
+        IEnumerator Inmune()
+        {
+            inmune = true;
+            yield return new WaitForSeconds(timeInmune);
+            inmune = false;
         }
     }
     //Pendiente de buscar que tumblee cuando impacta la nave del jugador con un enemigo/asteroide

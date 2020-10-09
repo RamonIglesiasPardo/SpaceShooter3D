@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 19900000}
   m_Layer: 0
   m_Name: Spark-2-Particles
-  m_TagString: Untagged
+  m_TagString: PowerUpVelocity
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -442,7 +442,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -495,7 +495,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -4749,7 +4749,7 @@ GameObject:
   - component: {fileID: 19900002}
   m_Layer: 0
   m_Name: Spark-1-Particles
-  m_TagString: Untagged
+  m_TagString: PowerUpVelocity
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5178,7 +5178,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -5231,7 +5231,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -9482,12 +9482,11 @@ GameObject:
   m_Component:
   - component: {fileID: 400004}
   - component: {fileID: 3300000}
-  - component: {fileID: 13500000}
   - component: {fileID: 2300000}
   - component: {fileID: 11400000}
   m_Layer: 0
   m_Name: PowerUp
-  m_TagString: Untagged
+  m_TagString: PowerUpVelocity
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9514,19 +9513,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100004}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!135 &13500000
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100004}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: -1.223432, y: 5.201405, z: 2.134192}
 --- !u!23 &2300000
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9589,8 +9575,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 400006}
-  - component: {fileID: 794821685020004345}
-  - component: {fileID: -2022805354397656594}
+  - component: {fileID: 2436284652939085598}
+  - component: {fileID: 7821634852857827493}
   m_Layer: 0
   m_Name: PowerUpContainerDoubleSpark-1
   m_TagString: PowerUpVelocity
@@ -9616,7 +9602,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &794821685020004345
+--- !u!54 &2436284652939085598
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9632,7 +9618,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &-2022805354397656594
+--- !u!135 &7821634852857827493
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9640,11 +9626,11 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100006}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: -1.223432, y: 5.201405, z: 2.134192}
 --- !u!1 &100010
 GameObject:
   m_ObjectHideFlags: 0
@@ -9655,12 +9641,11 @@ GameObject:
   m_Component:
   - component: {fileID: 400010}
   - component: {fileID: 3300002}
-  - component: {fileID: 13500002}
   - component: {fileID: 2300002}
   - component: {fileID: 11400002}
   m_Layer: 0
   m_Name: InnerPowerUp
-  m_TagString: Untagged
+  m_TagString: PowerUpVelocity
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9687,19 +9672,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100010}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!135 &13500002
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100010}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &2300002
 MeshRenderer:
   m_ObjectHideFlags: 0
