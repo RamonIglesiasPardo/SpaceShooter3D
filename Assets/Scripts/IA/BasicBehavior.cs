@@ -14,12 +14,15 @@ public class BasicBehavior : MonoBehaviour
     public int liveCount;
     public GameObject hitExplosion;
     public GameObject destroyExplosion;
+    public AudioClip audioExplosion;
     private GameController gameController;
+    AudioSource audioFont;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
+        audioFont = GetComponent<AudioSource>();
         //Debug.Log(inFormation);
     }
 
@@ -44,6 +47,8 @@ public class BasicBehavior : MonoBehaviour
         {
             Debug.Log("<color=green>BaseEnemyBehavior: </color>Collision detected with player!!");
             Instantiate(destroyExplosion, transform.position, transform.rotation);
+            audioFont.clip = audioExplosion;
+            audioFont.Play();
             Destroy(gameObject);
         }
     }
@@ -78,6 +83,8 @@ public class BasicBehavior : MonoBehaviour
         if (liveCount <= 0)
         {
             Instantiate(destroyExplosion, transform.position, transform.rotation);
+            audioFont.clip = audioExplosion;
+            audioFont.Play();
             Debug.Log("<color=green> BaseEnemyBehavior: </color>" + ": Destruido!");
             Destroy(this.gameObject);
             gameController.IncreasePoints(scoreValue);

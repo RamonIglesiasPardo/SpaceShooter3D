@@ -19,6 +19,8 @@ public class PlayerShipController : MonoBehaviour
     public AudioClip audioPower;
     public AudioClip inmunityOn;
     public AudioClip inmunityOff;
+    public AudioClip audioShoot;
+    public AudioClip audioExplosion;
     GameController gameController;
     AudioSource audioFont;
 
@@ -58,6 +60,8 @@ public class PlayerShipController : MonoBehaviour
         {
             shoot = true;
             laserbeamControl.SwitchLaserBeam();
+            audioFont.clip = audioShoot;
+            audioFont.Play();
             Debug.Log("<color=green>ShipController: </color>We are shooting!!");
         }
 
@@ -95,6 +99,8 @@ public class PlayerShipController : MonoBehaviour
                     {
                         lives = 0;
                         Instantiate(playerExplosion, transform.position, transform.rotation);
+                        audioFont.clip = audioExplosion;
+                        audioFont.Play();
                         Destroy(gameObject);
                         gameController.GameOver();
                         isTriggered = false;
