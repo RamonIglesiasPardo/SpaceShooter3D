@@ -31,7 +31,7 @@ public class Spawner : MonoBehaviour
         asteroids = Resources.LoadAll<GameObject>("Asteroids/Prefabs");
         powerups = Resources.LoadAll<GameObject>("PowerUp/Prefabs/PowerupsShooter");
         timeToStartNextWave = Time.time + waveStart;
-        timetoSendPowerUp = timeToStartNextWave * 5;
+        timetoSendPowerUp = timeToStartNextWave * 1;
         formations = GetComponent<FormationConstructor>();
     }
 
@@ -61,7 +61,7 @@ public class Spawner : MonoBehaviour
             GameObject go = Instantiate(element, spawnPosition, spawnRotation);
             Rigidbody rb = go.GetComponent<Rigidbody>();
             rb.velocity = Vector3.back * 10;
-            timetoSendPowerUp = (Time.time + spawnRatePowerUps) * 10;
+            timetoSendPowerUp = (Time.time + spawnRatePowerUps) * 1;
         }
     }
 

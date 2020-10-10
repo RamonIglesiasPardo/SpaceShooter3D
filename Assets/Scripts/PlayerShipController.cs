@@ -16,7 +16,11 @@ public class PlayerShipController : MonoBehaviour
     public int lives;
     protected bool inmune;
     public int timeInmune;
+    public AudioClip audioPower;
+    public AudioClip inmunityOn;
+    public AudioClip inmunityOff;
     GameController gameController;
+    AudioSource audioFont;
 
     private void Start()
     {
@@ -28,6 +32,7 @@ public class PlayerShipController : MonoBehaviour
         joyButton = FindObjectOfType<JoyButton>();
         rb = GetComponent<Rigidbody>();
         laserbeamControl = GameObject.FindGameObjectWithTag("LaserSystem").GetComponent<LaserBeamControl>();
+        audioFont = GetComponent<AudioSource>();
     }
 
     private void FixedUpdate()
@@ -72,6 +77,8 @@ public class PlayerShipController : MonoBehaviour
                 if (lives < 5)
                 {
                     lives = lives + 1;
+                    audioFont.clip = audioPower;
+                    audioFont.Play();
                     gameController.ShowHUDLives(lives);
                 }
             }
@@ -100,7 +107,11 @@ public class PlayerShipController : MonoBehaviour
         IEnumerator Inmune()
         {
             inmune = true;
+            audioFont.clip = inmunityOn;
+            audioFont.Play();
             yield return new WaitForSeconds(timeInmune);
+            audioFont.clip = inmunityOff;
+            audioFont.Play();
             inmune = false;
         }
     }
