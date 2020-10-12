@@ -29,7 +29,10 @@ public class Score
         {
             score = score.Replace(c, string.Empty);
         }
-        this.scoreAsInt = int.Parse(score);
+        int x = 0;
+        if (Int32.TryParse(score, out x)) {
+                scoreAsInt = Int32.Parse(score);
+                };
     }
     public string CreateScore(string playerName, string date, string score)
     {
