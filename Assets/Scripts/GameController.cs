@@ -90,7 +90,6 @@ public class GameController : MonoBehaviour
         //  mostrarpuntuancion
         spawner.Spawn3DText("Game\nOver", true, 20f);
         new Score().AddNewScore(new Score(PlayerPrefs.GetString("PlayerName"), DateTime.Now, score));
-        pauseButton.enabled =false;
         StartCoroutine(AnyKeyToBackMenu());
     }
     private void AcelerateRemainingEnemies()
