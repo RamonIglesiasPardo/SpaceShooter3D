@@ -47,8 +47,6 @@ public class BasicBehavior : MonoBehaviour
         {
             Debug.Log("<color=green>BaseEnemyBehavior: </color>Collision detected with player!!");
             Instantiate(destroyExplosion, transform.position, transform.rotation);
-            audioFont.clip = audioExplosion;
-            audioFont.Play();
             Destroy(gameObject);
         }
     }
@@ -83,8 +81,6 @@ public class BasicBehavior : MonoBehaviour
         if (liveCount <= 0)
         {
             Instantiate(destroyExplosion, transform.position, transform.rotation);
-            audioFont.clip = audioExplosion;
-            audioFont.Play();
             Debug.Log("<color=green> BaseEnemyBehavior: </color>" + ": Destruido!");
             Destroy(this.gameObject);
             gameController.IncreasePoints(scoreValue);

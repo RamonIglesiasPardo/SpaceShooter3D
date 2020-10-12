@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class LaserBeamControl : MonoBehaviour
 {
-    public GameObject[] gameObjects;
+    public GameObject[] laserObjects;
     
     // Start is called before the first frame update
     void Start()
     {
-        gameObjects = GameObject.FindGameObjectsWithTag("Laser");
-        foreach (GameObject obj in gameObjects)
+        laserObjects = GameObject.FindGameObjectsWithTag("Laser");
+        foreach (GameObject obj in laserObjects)
         {
             obj.SetActive(false);
         }
@@ -19,7 +19,7 @@ public class LaserBeamControl : MonoBehaviour
 
     public void SwitchLaserBeam ()
     {
-        foreach (GameObject obj in gameObjects)
+        foreach (GameObject obj in laserObjects)
         {
             if (!obj.activeSelf)
             {
@@ -33,13 +33,16 @@ public class LaserBeamControl : MonoBehaviour
     {
         yield return new WaitForSeconds(0.3f);
         RaycastHit hit;
-        foreach (GameObject obj in gameObjects)
+        foreach (GameObject obj in laserObjects)
         {
             if (Physics.Raycast(obj.transform.position, obj.transform.TransformDirection(Vector3.forward), out hit, 15.0f))
             {
                 Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
                 Debug.Log("Did Hit");
-                hit.collider.gameObject.GetComponent<BasicBehavior>().HitCount();
+                if (!hit.collider.gameObject.CompareTag("PowerUpLive") && !hit.collider.gameObject.CompareTag("PowerUpVelocity"))
+                {
+                    hit.collider.gameObject.GetComponent<BasicBehavior>().HitCount();
+                }                    
             }
             else
             {

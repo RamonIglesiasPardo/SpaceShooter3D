@@ -84,11 +84,13 @@ public class PlayerShipController : MonoBehaviour
                     audioFont.clip = audioPower;
                     audioFont.Play();
                     gameController.ShowHUDLives(lives);
+                    Destroy(other.gameObject);
                 }
             }
             else if (other.gameObject.CompareTag("PowerUpVelocity"))
             {
                 StartCoroutine (Inmune ());
+                Destroy(other.gameObject);
             }
             else
             {
@@ -98,9 +100,7 @@ public class PlayerShipController : MonoBehaviour
                     if (lives <= 0 && isTriggered)
                     {
                         lives = 0;
-                        Instantiate(playerExplosion, transform.position, transform.rotation);
-                        audioFont.clip = audioExplosion;
-                        audioFont.Play();
+                        Instantiate(playerExplosion, transform.position, transform.rotation);                      
                         Destroy(gameObject);
                         gameController.GameOver();
                         isTriggered = false;
