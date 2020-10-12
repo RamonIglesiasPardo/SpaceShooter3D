@@ -50,8 +50,11 @@ public class GameController : MonoBehaviour
 
     private void increaseScoreEachSecond()
     {
-        score++;
-        StartCoroutine(ScoreUpdater());
+        if (spawner.isSpawning)
+        {
+            score++;
+            StartCoroutine(ScoreUpdater());
+        }      
     }
 
     private void Update()

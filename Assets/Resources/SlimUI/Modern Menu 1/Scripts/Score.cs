@@ -25,7 +25,8 @@ public class Score
         this.player = playerName;
         this.date = date;
         this.score = score;
-        foreach (var c in new string[] { "." })
+        String charToFind = (score.Contains(',')) ? "," : ".";
+        foreach (var c in new string[] { charToFind })
         {
             score = score.Replace(c, string.Empty);
         }

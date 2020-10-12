@@ -30,11 +30,11 @@ public class ScoreMenu : MonoBehaviour
     private string CreateDefaultScores()
     {
         String scores = String.Empty;
-        scores += CreateScore("El Fari", DateTime.Now, 9996);
+        scores += CreateScore("El Fari", DateTime.Now, 0);
         scores += CreateScore("The Invictus", DateTime.Now, 9995);
         scores += CreateScore("Moncho", DateTime.Now, 10000);
-        scores += CreateScore("Stradmann", DateTime.Now, 9999);
-        scores += CreateScore("RAlonso", DateTime.Now, 9998);
+        scores += CreateScore("Stradmann", DateTime.Now, 9998);
+        scores += CreateScore("RAlonso", DateTime.Now, 9999);
         scores += CreateScore("Sweet", DateTime.Now, 9994);
         scores += CreateScore("__ProPlAy€r__#1", DateTime.Now, 9993);
         scores += CreateScore("Ipso", DateTime.Now, 9997);
