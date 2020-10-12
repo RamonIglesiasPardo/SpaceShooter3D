@@ -9,7 +9,10 @@ namespace SlimUI.ModernMenu{
 
 		Animator CameraObject;
 		GameObject PlayerShip;
-
+		private AudioSource audioFont;
+		[Header("Theme Audios")]
+		public AudioClip engineStarting;
+		public AudioClip engineStart;
 		[Header("Loaded Scene")]
 		[Tooltip("The name of the scene in the build settings that will load")]
 		public string sceneName = ""; 
@@ -80,6 +83,7 @@ namespace SlimUI.ModernMenu{
 		public TMP_Text finishedLoadingText;
 
 		void Start(){
+			audioFont = GetComponent<AudioSource>();
 			CameraObject = transform.GetComponent<Animator>();
 			playMenu.SetActive(false);
 			if(extrasMenu) extrasMenu.SetActive(false);
@@ -287,9 +291,16 @@ namespace SlimUI.ModernMenu{
 			CameraObject.SetBool("PlayerShipAnimation", true);
 			StartCoroutine(PlayerShip.GetComponent<Shake>().cShake(200f, 6f, PlayerShip.transform.position));
 			InvokeRepeating("StartEngineFX", 0.5f, 0.2f);
-			yield return new WaitForSeconds(3);
+			audioFont.clip = engineStarting;
+			audioFont.loop = true;
+			audioFont.Play();
+			yield return new WaitForSeconds(2);
 			while (!operation.isDone)
 			{
+				audioFont.clip = engineStart;
+				audioFont.loop = false;
+				audioFont.Play();
+				yield return new WaitForSeconds(5);
 				Vector3 ShipVector = PlayerShip.GetComponent<Transform>().TransformDirection(Vector3.forward);
 				PlayerShip.GetComponent<Rigidbody>().AddForce(ShipVector * 5000f, ForceMode.Acceleration);
 				yield return new WaitForSeconds(0.5f);

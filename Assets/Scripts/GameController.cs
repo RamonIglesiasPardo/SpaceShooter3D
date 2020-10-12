@@ -7,16 +7,19 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
+    private BackGroundController backGroundController;
+    public int scoreAmountToIncreaseLvl;
     public PauseButton pauseButton;
     private TextMeshProUGUI scoreHUD;
     public Image[] lives;
     private int livesCount;
     private int score;
     private bool isBackToMenuAllowed;
-
     Spawner spawner;
     private void Start()
     {
+        InvokeRepeating("increaseScoreEachSecond", 1f, 1f);
+        backGroundController = GameObject.FindGameObjectWithTag("Background").GetComponent<BackGroundController>();
         spawner = GameObject.FindGameObjectWithTag("Spawner").GetComponent<Spawner>();
         scoreHUD = GameObject.FindGameObjectWithTag("scoreText").GetComponent<TMPro.TextMeshProUGUI>();
         score = 0;
@@ -44,10 +47,32 @@ public class GameController : MonoBehaviour
             }
         }        
     }
+
+    private void increaseScoreEachSecond()
+    {
+        score++;
+        StartCoroutine(ScoreUpdater());
+    }
+
     private void Update()
     {
         Time.timeScale = pauseButton.pauseIsPressed ? 0.0f : 1.0f;
         if (Input.anyKey && isBackToMenuAllowed) SceneManager.LoadScene(0);
+        IncreaseLevel();
+    }
+
+    private int tmplevel = 1;
+    
+
+    private void IncreaseLevel()
+    {        
+        if(score > scoreAmountToIncreaseLvl * tmplevel)
+        {
+            spawner.Spawn3DText("Lvl " + tmplevel++, false, 0);
+            spawner.level++;
+            backGroundController.panSpeed += 0.05f;
+            if (spawner.spawnRateEnemies >= 1) spawner.spawnRateEnemies -= 0.2f;  
+        }
     }
     private int tmp = 0;
     public void IncreasePoints(int points)
@@ -86,10 +111,9 @@ public class GameController : MonoBehaviour
     {
         spawner.isSpawning = false;
         AcelerateRemainingEnemies();
-        //  paraeljuego
-        //  mostrarpuntuancion
         spawner.Spawn3DText("Game\nOver", true, 20f);
         new Score().AddNewScore(new Score(PlayerPrefs.GetString("PlayerName"), DateTime.Now, score));
+        pauseButton.enabled = false;
         StartCoroutine(AnyKeyToBackMenu());
     }
     private void AcelerateRemainingEnemies()

@@ -1956,7 +1956,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 1
   waveStart: 0
-  spawnRateEnemies: 1
+  spawnRateEnemies: 3
   spawnRatePowerUps: 10
   isSpawning: 1
   is3DTextSpawning: 0
@@ -2513,6 +2513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00dc4d435ea0f3f4794f906ab271aeaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreAmountToIncreaseLvl: 10000
   pauseButton: {fileID: 1495915716}
   lives:
   - {fileID: 601341291}
@@ -2831,6 +2832,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1836518405398022975, guid: 4e57a001d73aee043aeaaee190915026,
+        type: 3}
+      propertyPath: m_TagString
+      value: Background
+      objectReference: {fileID: 0}
     - target: {fileID: 4202202031245353064, guid: 4e57a001d73aee043aeaaee190915026,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

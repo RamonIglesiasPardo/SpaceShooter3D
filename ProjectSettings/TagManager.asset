@@ -25,6 +25,7 @@ TagManager:
   - ScorePanel
   - PowerUpVelocity
   - PowerUpLive
+  - Background
   layers:
   - Default
   - TransparentFX
