@@ -42,7 +42,7 @@ namespace SlimUI.ModernMenu{
 		public GameObject difficultyhardcoretextLINE;
 
 		[Header("CONTROLS SETTINGS")]
-		public GameObject invertmousetext;
+		public GameObject useAceloremeter;
 
 		// sliders
 		public GameObject musicSlider;
@@ -108,8 +108,19 @@ namespace SlimUI.ModernMenu{
 				showhudtext.GetComponent<TMP_Text>().text = "on";
 			}
 
+			// check acelerometer value
+			if (!PlayerPrefs.HasKey("UseAccelerometer")) PlayerPrefs.SetInt("UseAccelerometer", 0);
+			if (PlayerPrefs.GetInt("UseAccelerometer") == 0)
+			{
+				useAceloremeter.GetComponent<TMP_Text>().text = "off";
+			}
+			else
+			{
+				useAceloremeter.GetComponent<TMP_Text>().text = "on";
+			}
+
 			// check tool tip value
-			if(PlayerPrefs.GetInt("ToolTips")==0){
+			if (PlayerPrefs.GetInt("ToolTips")==0){
 				tooltipstext.GetComponent<TMP_Text>().text = "off";
 			}
 			else{
@@ -174,10 +185,10 @@ namespace SlimUI.ModernMenu{
 
 			// check mouse inverse
 			if(PlayerPrefs.GetInt("Inverted")==0){
-				invertmousetext.GetComponent<TMP_Text>().text = "off";
+				useAceloremeter.GetComponent<TMP_Text>().text = "off";
 			}
 			else if(PlayerPrefs.GetInt("Inverted")==1){
-				invertmousetext.GetComponent<TMP_Text>().text = "on";
+				useAceloremeter.GetComponent<TMP_Text>().text = "on";
 			}
 
 			// check motion blur
@@ -384,14 +395,16 @@ namespace SlimUI.ModernMenu{
 			}
 		}
 
-		public void  InvertMouse (){
-			if(PlayerPrefs.GetInt("Inverted")==0){
-				PlayerPrefs.SetInt("Inverted",1);
-				invertmousetext.GetComponent<TMP_Text>().text = "on";
+		public void  SetAcelerometerUse (){
+			if (PlayerPrefs.GetInt("UseAccelerometer") == 0)
+			{
+				PlayerPrefs.SetInt("UseAccelerometer", 1);
+				useAceloremeter.GetComponent<TMP_Text>().text = "on";
 			}
-			else if(PlayerPrefs.GetInt("Inverted")==1){
-				PlayerPrefs.SetInt("Inverted",0);
-				invertmousetext.GetComponent<TMP_Text>().text = "off";
+			else if (PlayerPrefs.GetInt("UseAccelerometer") == 1)
+			{
+				PlayerPrefs.SetInt("UseAccelerometer", 0);
+				useAceloremeter.GetComponent<TMP_Text>().text = "off";
 			}
 		}
 

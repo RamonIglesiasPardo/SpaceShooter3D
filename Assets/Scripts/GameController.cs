@@ -28,7 +28,7 @@ public class GameController : MonoBehaviour
         livesCount = 3;
         //Canvas CanvasObject = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Canvas>();
         GameObject[] joystickElements = GameObject.FindGameObjectsWithTag("Joystick");
-        if (PlayerPrefs.GetInt("ShowHUD") == 0)
+        if (PlayerPrefs.GetInt("ShowHUD") == 0 || PlayerPrefs.GetInt("UseAccelerometer") == 1)
         {            
             foreach (GameObject element in joystickElements)
             {
@@ -38,14 +38,7 @@ public class GameController : MonoBehaviour
             {
                 element.GetComponent<Image>().color = new Color(0, 0, 0, 0);
             }
-        }
-        if (PlayerPrefs.GetInt("UseAccelerometer") == 1)
-        {           
-            foreach (GameObject element in joystickElements)
-            {
-                element.SetActive(false);
-            }
-        }        
+        }             
     }
 
     private void increaseScoreEachSecond()

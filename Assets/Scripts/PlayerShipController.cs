@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerShipController : MonoBehaviour
@@ -39,22 +40,7 @@ public class PlayerShipController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (transform.position.z < 0.0f)
-        {
-            transform.Translate(Vector3.forward * Time.deltaTime);
-        }
-        float moveHorizontal = joystick.Horizontal + Input.GetAxis("Horizontal");
-        float moveVertical = joystick.Vertical + Input.GetAxis("Vertical");
-
-        Vector3 movement = new Vector3(moveHorizontal, moveVertical, 0.0f);
-        rb.velocity = movement * speed;
-        rb.position = new Vector3
-        (
-        Mathf.Clamp(transform.position.x, xMin, xMax),
-        Mathf.Clamp(transform.position.y, yMin, yMax),
-        0.0f
-        );
-        rb.rotation = Quaternion.Euler(0.0f, 0.0f, rb.velocity.x * -tilt);
+        SetControlsType();
 
         if (!shoot && joyButton.Pressed)
         {
@@ -69,6 +55,63 @@ public class PlayerShipController : MonoBehaviour
         {
             shoot = false;
         }
+    }
+
+    private void SetControlsType()
+    {
+        if (transform.position.z < 0.0f) transform.Translate(Vector3.forward * Time.deltaTime);
+        if (PlayerPrefs.GetInt("UseAccelerometer") == 0)
+        {
+            JostickControl();
+        } else
+        {
+            AcelerometerControl();
+        }       
+    }
+    
+    private void AcelerometerControl()
+    {
+
+        Vector3 dir = Vector3.zero;
+        // we assume that the device is held parallel to the ground
+        // and the Home button is in the right hand
+
+        // remap the device acceleration axis to game coordinates:
+        // 1) XY plane of the device is mapped onto XZ plane
+        // 2) rotated 90 degrees around Y axis
+
+        dir.y = -Input.acceleration.y;
+        dir.x = Input.acceleration.x;
+
+        // clamp acceleration vector to the unit sphere
+        if (dir.sqrMagnitude > 1)
+            dir.Normalize();
+
+        // Make it move 10 meters per second instead of 10 meters per frame...
+        dir *= Time.deltaTime;
+
+        // Move object
+        transform.Translate(dir * speed);
+
+
+
+        //transform.position += new Vector3(Input.acceleration.x, Input.acceleration.y, 0.0f) * Time.deltaTime * speed;
+        //rb.velocity = new Vector3(Input.acceleration.x, Input.acceleration.y, 0.0f) * speed;
+        SetClamp();
+    }
+
+    private void JostickControl()
+    {        
+        float moveHorizontal = joystick.Horizontal + Input.GetAxis("Horizontal");
+        float moveVertical = joystick.Vertical + Input.GetAxis("Vertical");
+        Vector3 movement = new Vector3(moveHorizontal, moveVertical, 0.0f);
+        rb.velocity = movement * speed;
+        SetClamp();
+    }
+    private void SetClamp()
+    {
+        rb.position = new Vector3(Mathf.Clamp(transform.position.x, xMin, xMax), Mathf.Clamp(transform.position.y, yMin, yMax), 0.0f);
+        rb.rotation = Quaternion.Euler(0.0f, 0.0f, rb.velocity.x * -tilt);
     }
     private bool isTriggered = true;
     private void OnTriggerEnter(Collider other)
