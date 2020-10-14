@@ -2513,7 +2513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00dc4d435ea0f3f4794f906ab271aeaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreAmountToIncreaseLvl: 50000
+  scoreAmountToIncreaseLvl: 30000
   pauseButton: {fileID: 1495915716}
   lives:
   - {fileID: 601341291}
