@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerShipController : MonoBehaviour
 {
@@ -36,6 +37,8 @@ public class PlayerShipController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         laserbeamControl = GameObject.FindGameObjectWithTag("LaserSystem").GetComponent<LaserBeamControl>();
         audioFont = GetComponent<AudioSource>();
+        initialAcceleration = Input.acceleration;
+        currentAcceleration = Vector3.zero;
     }
 
     private void FixedUpdate()
@@ -68,36 +71,47 @@ public class PlayerShipController : MonoBehaviour
             AcelerometerControl();
         }       
     }
-    
+    public float smooth = 0.4f;
+    public Text inputValue;
+    public float newRotation;
+    public float sensitivity = 6;
+    private Vector3 currentAcceleration, initialAcceleration;
     private void AcelerometerControl()
     {
 
-        Vector3 dir = Vector3.zero;
-        // we assume that the device is held parallel to the ground
-        // and the Home button is in the right hand
+        transform.Translate(Input.acceleration.x, Input.acceleration.y, 0);
+        currentAcceleration = Vector3.Lerp(currentAcceleration, Input.acceleration - initialAcceleration, Time.deltaTime / smooth);
 
-        // remap the device acceleration axis to game coordinates:
-        // 1) XY plane of the device is mapped onto XZ plane
-        // 2) rotated 90 degrees around Y axis
-
-        dir.y = -Input.acceleration.y;
-        dir.x = Input.acceleration.x;
-
-        // clamp acceleration vector to the unit sphere
-        if (dir.sqrMagnitude > 1)
-            dir.Normalize();
-
-        // Make it move 10 meters per second instead of 10 meters per frame...
-        dir *= Time.deltaTime;
-
-        // Move object
-        transform.Translate(dir * speed);
+        newRotation = Mathf.Clamp(currentAcceleration.x * sensitivity, -1, 1);
+        transform.Rotate(0, 0, -newRotation);
 
 
+        //Vector3 dir = Vector3.zero;
+        //// we assume that the device is held parallel to the ground
+        //// and the Home button is in the right hand
 
-        //transform.position += new Vector3(Input.acceleration.x, Input.acceleration.y, 0.0f) * Time.deltaTime * speed;
-        //rb.velocity = new Vector3(Input.acceleration.x, Input.acceleration.y, 0.0f) * speed;
-        SetClamp();
+        //// remap the device acceleration axis to game coordinates:
+        //// 1) XY plane of the device is mapped onto XZ plane
+        //// 2) rotated 90 degrees around Y axis
+
+        //dir.y = -Input.acceleration.y;
+        //dir.x = Input.acceleration.x;
+
+        //// clamp acceleration vector to the unit sphere
+        //if (dir.sqrMagnitude > 1)
+        //    dir.Normalize();
+
+        //// Make it move 10 meters per second instead of 10 meters per frame...
+        //dir *= Time.deltaTime;
+
+        //// Move object
+        //transform.Translate(dir * speed);
+        ////rb.velocity = dir * speed;
+
+
+        ////transform.position += new Vector3(Input.acceleration.x, Input.acceleration.y, 0.0f) * Time.deltaTime * speed;
+        ////rb.velocity = new Vector3(Input.acceleration.x, Input.acceleration.y, 0.0f) * speed;
+        //SetClamp();
     }
 
     private void JostickControl()
