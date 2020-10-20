@@ -92,7 +92,7 @@ public class GameController : MonoBehaviour
 
     public void ShowHUDLives(int livesAmount)
     {
-        livesCount = livesAmount;
+        livesCount = livesAmount - 1;
         for (int i = 0; i < livesCount; i++)
         {
             lives[i].enabled = true;
